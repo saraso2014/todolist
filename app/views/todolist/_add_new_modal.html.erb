@@ -1,0 +1,16 @@
+<div class="ui tiny addnew modal">
+    <div class="header">
+      Add new project
+    </div>
+
+    <div class="content">
+     <div class="ui form">
+        <%= form_for( Project.create, remote: true) do |f| %>
+        <%= f.text_field :name, placeholder: "Enter new Project's name" %>
+        <p></p>
+        <%= f.submit "Add", class: "ui positive button" %>
+
+      <% end %>
+    </div>
+    </div>
+</div>
