@@ -13,6 +13,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'semantic-ui-sass'
+gem 'devise'
 
 group :development do
   gem 'sqlite3'
