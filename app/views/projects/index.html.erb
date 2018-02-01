@@ -20,19 +20,21 @@
                     <div class="ui card">
                         <div class="content ui inverted blue segment">
                             <div class="right floated meta">
-                                <i class="ui teal write icon"></i>
+                                <i class="ui inverted write icon"></i>
                                 <%= link_to project_path(p),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } do %>
-                                    <i class="ui teal delete icon"></i>
+                                    <i class="ui inverted delete icon"></i>
                                     <% end %>
                             </div>
                             <i class="browser outline icon"></i>
                             <%= p.name %>
+
                         </div>
                         <div class="image">
                             <img>
                         </div>
+
                         <div class="extra content">
                             <div class="ui small right action fluid left icon input">
                                 <i class="add green icon"></i>
@@ -51,11 +53,8 @@
                                 <a>22 october 2018
                                     <i class="calendar outline icon"></i>
                                 </a>
-
                                 <i class="ui grey write icon"></i>
                                 <i class="ui grey delete icon"></i>
-
-
                             </span>
                             <div class="ui checkbox">
                                 <input type="checkbox" name="example">

@@ -1,4 +1,16 @@
 class Task < ApplicationRecord
   belongs_to :project
-  belongs_to :priority
+
+  PRIORITIES = [
+    ['Low', 1],
+    ['Medium', 2],
+    ['High', 3],
+    ['Urgent', 4]
+  ]
+
+  def complete!
+    self.done = true
+    save
+  end
+  
 end
