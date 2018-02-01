@@ -1,3 +1,19 @@
 @import "semantic-ui";
 
 .cent { text-align: center }
+
+
+.notice { 
+    text-align: center; 
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: rgb(138, 158, 142);
+    background-color: rgb(224, 255, 226);
+    color: rgb(95, 102, 97);
+    padding: 10px 0;
+    vertical-align: middle;
+    font-size: 1.1em;
+    width: 350px;
+    margin: 0 auto;
+}

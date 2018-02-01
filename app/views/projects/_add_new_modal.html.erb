@@ -5,7 +5,7 @@
 
     <div class="content">
      <div class="ui form">
-        <%= form_for( Project.create, remote: true) do |f| %>
+        <%= form_for :project, :url => { :action => "create" } do |f| %>
         <%= f.text_field :name, placeholder: "Enter new Project's name" %>
         <p></p>
         <%= f.submit "Add", class: "ui positive button" %>

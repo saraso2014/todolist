@@ -1,0 +1,85 @@
+<div class="ui container">
+    <p></p>
+    <div class="cent">
+        <h2 class="ui center aligned header">
+            SIMPLE TODO LISTS
+        </h2>
+        Ruby Garage
+    </div>
+    <p></p>
+    <% if notice %>
+        <div class="notice">
+            <%= notice %>
+        </div>
+        <br>
+        <% end %>
+
+
+            <% @projects.each do |p| %>
+                <div class="ui one cards">
+                    <div class="ui card">
+                        <div class="content ui inverted blue segment">
+                            <div class="right floated meta">
+                                <i class="ui teal write icon"></i>
+                                <%= link_to project_path(p),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } do %>
+                                    <i class="ui teal delete icon"></i>
+                                    <% end %>
+                            </div>
+                            <i class="browser outline icon"></i>
+                            <%= p.name %>
+                        </div>
+                        <div class="image">
+                            <img>
+                        </div>
+                        <div class="extra content">
+                            <div class="ui small right action fluid left icon input">
+                                <i class="add green icon"></i>
+                                <input type="text" placeholder="Add new task to the project...">
+                                <div class="ui green small button">Add</div>
+                            </div>
+                            <p></p>
+                            <a class="like">
+                                Show completed tasks
+                             </a>
+                        </div>
+
+
+                        <div class="content">
+                            <span class="right floated">
+                                <a>22 october 2018
+                                    <i class="calendar outline icon"></i>
+                                </a>
+
+                                <i class="ui grey write icon"></i>
+                                <i class="ui grey delete icon"></i>
+
+
+                            </span>
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="example">
+                                <label>Something to do here will be some text some day maybe..</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <% end %>
+
+                    <p></p>
+
+                    <div class="cent">
+                        <button class="ui labeled icon primary addnew button">
+                            <i class="add icon"></i>
+                            Add ToDo List
+                        </button>
+                    </div>
+</div>
+
+<br/>
+<%= render 'add_new_modal' %>
+    <script>
+        $('.addnew.modal').modal('attach events', '.addnew.button', 'show');
+        $(".notice").fadeOut(5000);
+    </script>
