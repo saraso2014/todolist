@@ -14,53 +14,62 @@
         <br>
         <% end %>
 
-
             <% @projects.each do |p| %>
                 <div class="ui one cards">
                     <div class="ui card">
                         <div class="content ui inverted blue segment">
                             <div class="right floated meta">
-                                <i class="ui inverted write icon"></i>
+                                <i class="ui inverted write icon" data-content="Edit"></i>
                                 <%= link_to project_path(p),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } do %>
-                                    <i class="ui inverted delete icon"></i>
+                                    <i class="ui inverted delete icon" data-content="Delete"></i>
                                     <% end %>
                             </div>
                             <i class="browser outline icon"></i>
                             <%= p.name %>
-
-                        </div>
-                        <div class="image">
-                            <img>
                         </div>
 
                         <div class="extra content">
-                            <div class="ui small right action fluid left icon input">
-                                <i class="add green icon"></i>
-                                <input type="text" placeholder="Add new task to the project...">
-                                <div class="ui green small button">Add</div>
-                            </div>
-                            <p></p>
-                            <a class="like">
-                                Show completed tasks
-                             </a>
-                        </div>
-
-
-                        <div class="content">
-                            <span class="right floated">
-                                <a>22 october 2018
-                                    <i class="calendar outline icon"></i>
+                            <%= form_for :task, url: project_tasks_path(p.id), action: :create do |f| %>
+                                <div class="ui small right action fluid left icon input">
+                                    <i class="add green icon"></i>
+                                    <%= f.text_field :name do %>
+                                        <input type="text" placeholder="Add new task to the project...">
+                                        <% end %>
+                                            <div>
+                                                <%= f.submit 'Add', class: "ui green small button" %>
+                                            </div>
+                                            <% end %>
+                                </div>
+                                <p></p>
+                                <a class="like">
+                                    Show completed tasks
                                 </a>
-                                <i class="ui grey write icon"></i>
-                                <i class="ui grey delete icon"></i>
-                            </span>
-                            <div class="ui checkbox">
-                                <input type="checkbox" name="example">
-                                <label>Something to do here will be some text some day maybe..</label>
-                            </div>
                         </div>
+
+                        <% p.tasks.each do |task| %>
+                            <div class="content">
+                                <span class="right floated">
+                                    <a>22 october 2018
+                                        <i class="calendar outline icon" data-content="Add due date"></i>
+                                    </a>
+                                    <i class="ui grey write icon" data-content="Edit"></i>
+                                    <%= link_to [task.project, task],
+                                    method: :delete,
+                                    data: { confirm: 'Are you sure?' } do %>
+                                        <i class="ui grey delete icon" data-content="Delete"></i>
+                                        <% end %>
+
+                                </span>
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="example">
+                                    <label>
+                                        <%= task.name %>
+                                    </label>
+                                </div>
+                            </div>
+                            <% end %>
 
                     </div>
                 </div>
@@ -81,4 +90,7 @@
     <script>
         $('.addnew.modal').modal('attach events', '.addnew.button', 'show');
         $(".notice").fadeOut(5000);
+        $('.write.icon').popup();
+        $('.delete.icon').popup();
+        $('.calendar.outline.icon').popup();
     </script>
