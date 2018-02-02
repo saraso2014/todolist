@@ -18,6 +18,10 @@ class TasksController < ApplicationController
       @task.destroy
       redirect_to projects_path
     end
+
+    def priority
+      Task.priority!
+    end
   
     private
       def task_params

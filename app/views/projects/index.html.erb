@@ -51,6 +51,15 @@
                         <% p.tasks.each do |task| %>
                             <div class="content">
                                 <span class="right floated">
+                                    <% case task.priority.to_i %>
+                                    <% when 1 %>
+                                    <div class="ui yellow horizontal label"><%= Task::PRIORITIES[1] %></div>
+                                    <% when 2 %>
+                                    <div class="ui orange horizontal label"><%= Task::PRIORITIES[2] %></div>
+                                    <% when 3 %>
+                                    <div class="ui red horizontal label"><%= Task::PRIORITIES[3] %></div>
+                                    <% end %>
+
                                     <a>22 october 2018
                                         <i class="calendar outline icon" data-content="Add due date"></i>
                                     </a>
@@ -62,11 +71,14 @@
                                         <% end %>
 
                                 </span>
+                                
                                 <div class="ui checkbox">
+                                    
                                     <input type="checkbox" name="example">
                                     <label>
                                         <%= task.name %>
                                     </label>
+                                    
                                 </div>
                             </div>
                             <% end %>
