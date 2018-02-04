@@ -51,22 +51,32 @@
                         <% p.tasks.each do |task| %>
                             <div class="content">
                                 <span class="right floated">
+
+                               
+
                                     <% case task.priority.to_i %>
                                     <% when 1 %>
-                                    <div class="ui yellow horizontal label"><%= Task::PRIORITIES[1] %></div>
+                                    <div class="ui yellow horizontal label">
+                                        <%= link_to projects_path do %>
+                                            <strong><%= task.priority %></strong> <span><%= Task::PRIORITIES[task.priority.to_i] %></span>
+                                        <% end %>
+                                    </div>
                                     <% when 2 %>
                                     <div class="ui orange horizontal label"><%= Task::PRIORITIES[2] %></div>
                                     <% when 3 %>
                                     <div class="ui red horizontal label"><%= Task::PRIORITIES[3] %></div>
+                                    <% else %>
+                                    <%= link_to :url => { :controller => :tasks, :action => "create", :method => :post } do %>
+                                        <strong><%= task.priority %></strong> <span>Priority</span>
+                                    <% end %>
                                     <% end %>
 
-                                    <a>22 october 2018
+                                    <a>
                                         <i class="calendar outline icon" data-content="Add due date"></i>
                                     </a>
                                     <i class="ui grey write icon" data-content="Edit"></i>
                                     <%= link_to [task.project, task],
-                                    method: :delete,
-                                    data: { confirm: 'Are you sure?' } do %>
+                                    method: :delete do %>
                                         <i class="ui grey delete icon" data-content="Delete"></i>
                                         <% end %>
 

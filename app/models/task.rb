@@ -9,9 +9,7 @@ class Task < ApplicationRecord
   end
 
   def priority!
-    self.priority == 0 ? self.priority = 1 :
-      self.priority == 1 ? self.priority = 2 :
-        self.priority == 2 ? self.priority = 3 : self.priority
+    self.priority == 3 ? self.priority = 0 : self.priority += 1 
     save
   end
   
