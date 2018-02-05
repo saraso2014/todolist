@@ -47,11 +47,10 @@
                                 </a>
                         </div>
 
-                        <% p.tasks.order(priority: :desc).each do |task| %>
+                        <% p.tasks.where(status: false).order(priority: :desc).each do |task| %>
                             <div class="content">
                                 <span class="right floated">
 
-                                    
                                         <% if task.due_date %>
                                         <%= task.due_date.strftime("%F") %>
                                         <% else %>
@@ -69,7 +68,7 @@
                                         <% priority_color = "red" %>
                                         <% end %>
 
-                                        <div class="ui <%= priority_color%> horizontal label" data-content = "Change priority">
+                                        <div class=  "ui <%= priority_color %> horizontal label"  data-content = "Change priority">
                                             <%= link_to priority_project_task_path(task.project, task), data: {method: :put} do %>
                                             <%= Task::PRIORITIES[task.priority.to_i] %>
                                             <% end %>
@@ -98,10 +97,50 @@
                             </div>
                             <% end %>
 
-                    </div>
+                            
+
+
+                            <!--Completed tasks-->
+
+                            <% p.tasks.where(status: true).order(priority: :desc).each do |task| %>
+                                <div class="content">
+                                    <span class="right floated">
+    
+                                            <% if task.due_date %>
+                                            <%= task.due_date.strftime("%F") %>
+                                            <% end %>
+                                        <%= link_to [task.project, task],
+                                        method: :delete do %>
+                                            <i class="ui grey delete icon" data-content="Delete"></i>
+                                         <% end %>
+    
+                                    </span>
+                                    
+                                    <%= link_to complete_project_task_path(task.project, task), data: {method: :put}, class: "ui checkbox" do %>
+                                    <input type="checkbox" name="example" <%= 'checked=""' if task.status %> >
+                                    <label>
+                                    <strike><%= task.name %></strike>
+                                    </label>
+                                    <% end %>
+    
+                                    <div class="ui checkbox">
+                                        
+                            
+                                        
+                                    </div>
+                                </div>
+                                <% end %>
+
+                                <!--End of Completed tasks-->
+
+
+      </div>   
+                              
                 </div>
                 <% end %>
 
+
+                
                     <p></p>
 
                     <div class="cent">

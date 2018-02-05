@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :project
-  before_create :set_priority
+  before_create :set_defaults
 
   PRIORITIES = ['Low','Medium','High','Urgent']
 
@@ -19,8 +19,9 @@ class Task < ApplicationRecord
   end
   
   private
-  def set_priority
+  def set_defaults
     self.priority = 0
+    self.status = false
   end
 
 end
