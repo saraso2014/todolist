@@ -34,8 +34,7 @@
                             <%= form_for :task, url: project_tasks_path(p.id), action: :create do |f| %>
                                 <div class="ui small right action fluid left icon input">
                                     <i class="add green icon"></i>
-                                    <%= f.text_field :name do %>
-                                        <input type="text" placeholder="Add new task to the project...">
+                                    <%= f.text_field :name, placeholder: "Add new task to the project..." do %>                           
                                         <% end %>
                                             <div>
                                                 <%= f.submit 'Add', class: "ui green small button" %>
@@ -48,32 +47,44 @@
                                 </a>
                         </div>
 
-                        <% p.tasks.each do |task| %>
+                        <% p.tasks.order(priority: :desc).each do |task| %>
                             <div class="content">
                                 <span class="right floated">
 
-                               
-
-                                    <% case task.priority.to_i %>
-                                    <% when 1 %>
-                                    <div class="ui yellow horizontal label">
-                                        <%= link_to projects_path do %>
-                                            <strong><%= task.priority %></strong> <span><%= Task::PRIORITIES[task.priority.to_i] %></span>
+                                    
+                                        <% if task.due_date %>
+                                        <%= task.due_date.strftime("%F") %>
+                                        <% else %>
+                                        <a>
+                                            <i class="calendar outline icon" data-content="Add due date"></i>
+                                        </a>
                                         <% end %>
-                                    </div>
-                                    <% when 2 %>
-                                    <div class="ui orange horizontal label"><%= Task::PRIORITIES[2] %></div>
-                                    <% when 3 %>
-                                    <div class="ui red horizontal label"><%= Task::PRIORITIES[3] %></div>
+
+                                    <% if task.priority %>
+
+                                        <% case task.priority.to_i %>
+                                        <% when 1 %>
+                                        <% priority_color = "yellow" %>
+                                        <% when 2 %>
+                                        <% priority_color = "orange" %>
+                                        <% when 3 %>
+                                        <% priority_color = "red" %>
+                                        <% end %>
+
+                                        <div class="ui <%= priority_color%> horizontal label" data-content = "Change priority">
+                                            <%= link_to projects_path do %>
+                                            <%= Task::PRIORITIES[task.priority.to_i] %>
+                                            <% end %>
+                                        </div>
+
                                     <% else %>
-                                    <%= link_to :url => { :controller => :tasks, :action => "create", :method => :post } do %>
-                                        <strong><%= task.priority %></strong> <span>Priority</span>
-                                    <% end %>
+
+                                        <%= link_to :url => { :controller => :tasks, :action => "create", :method => :post } do %>
+                                        <i class="ui remove bookmark icon" data-content = "Change priority"></i>
+                                        <% end %>
+
                                     <% end %>
 
-                                    <a>
-                                        <i class="calendar outline icon" data-content="Add due date"></i>
-                                    </a>
                                     <i class="ui grey write icon" data-content="Edit"></i>
                                     <%= link_to [task.project, task],
                                     method: :delete do %>
@@ -109,10 +120,13 @@
 
 <br/>
 <%= render 'add_new_modal' %>
+
     <script>
         $('.addnew.modal').modal('attach events', '.addnew.button', 'show');
         $(".notice").fadeOut(5000);
         $('.write.icon').popup();
         $('.delete.icon').popup();
         $('.calendar.outline.icon').popup();
+        $('.bookmark.icon').popup();
+        $('.horizontal.label').popup();l
     </script>
