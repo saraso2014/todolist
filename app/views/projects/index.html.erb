@@ -60,8 +60,6 @@
                                         </a>
                                         <% end %>
 
-                                    <% if task.priority %>
-
                                         <% case task.priority.to_i %>
                                         <% when 1 %>
                                         <% priority_color = "yellow" %>
@@ -76,14 +74,6 @@
                                             <%= Task::PRIORITIES[task.priority.to_i] %>
                                             <% end %>
                                         </div>
-
-                                    <% else %>
-
-                                        <%= link_to priority_project_task_path(task.project, task), data: {method: :put} do %>  
-                                        <i class="ui remove bookmark icon" data-content = "Change priority"></i>
-                                        <% end %>
-
-                                    <% end %>
 
                                     <i class="ui grey write icon" data-content="Edit"></i>
                                     <%= link_to [task.project, task],
