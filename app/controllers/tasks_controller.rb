@@ -20,11 +20,14 @@ class TasksController < ApplicationController
     end
 
     def priority
-      Task.priority!
+      @project = Project.find(params[:project_id])
+      @task = @project.tasks.find(params[:id])
+      @task.priority!
+      redirect_to projects_path
     end
   
     private
       def task_params
-        params.require(:task).permit(:name, :project_id, :id)
+        params.require(:task).permit(:name, :project_id, :id, :priority)
       end
 end

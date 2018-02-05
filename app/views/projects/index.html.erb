@@ -72,14 +72,14 @@
                                         <% end %>
 
                                         <div class="ui <%= priority_color%> horizontal label" data-content = "Change priority">
-                                            <%= link_to projects_path do %>
+                                            <%= link_to priority_project_task_path(task.project, task), data: {method: :put} do %>
                                             <%= Task::PRIORITIES[task.priority.to_i] %>
                                             <% end %>
                                         </div>
 
                                     <% else %>
 
-                                        <%= link_to :url => { :controller => :tasks, :action => "create", :method => :post } do %>
+                                        <%= link_to priority_project_task_path(task.project, task), data: {method: :put} do %>  
                                         <i class="ui remove bookmark icon" data-content = "Change priority"></i>
                                         <% end %>
 
