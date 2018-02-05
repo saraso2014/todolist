@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   PRIORITIES = ['Low','Medium','High','Urgent']
 
   def complete!
-    self.done = true
+    self.status = !self.status
     save
   end
 

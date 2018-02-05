@@ -89,16 +89,20 @@
                                     <%= link_to [task.project, task],
                                     method: :delete do %>
                                         <i class="ui grey delete icon" data-content="Delete"></i>
-                                        <% end %>
+                                     <% end %>
 
                                 </span>
                                 
+                                <%= link_to complete_project_task_path(task.project, task), data: {method: :put}, class: "ui checkbox" do %>
+                                <input type="checkbox" name="example" <%= 'checked=""' if task.status %> >
+                                <label>
+                                    <%= task.name %>
+                                </label>
+                                <% end %>
+
                                 <div class="ui checkbox">
                                     
-                                    <input type="checkbox" name="example">
-                                    <label>
-                                        <%= task.name %>
-                                    </label>
+                                    
                                     
                                 </div>
                             </div>

@@ -25,6 +25,13 @@ class TasksController < ApplicationController
       @task.priority!
       redirect_to projects_path
     end
+
+    def complete
+      @project = Project.find(params[:project_id])
+      @task = @project.tasks.find(params[:id])
+      @task.complete!
+      redirect_to projects_path
+    end
   
     private
       def task_params
