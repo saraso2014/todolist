@@ -16,7 +16,9 @@
                     <div class="ui card">
                         <div class="content ui inverted blue segment">
                             <div class="right floated meta">
-                                <i class="ui inverted write icon" data-content="Edit"></i>
+                                <%= link_to edit_project_path(p), remote: true do %>
+                                    <i class="ui inverted write icon project" data-content="Edit"></i>
+                                    <% end %>
                                 <%= link_to project_path(p),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } do %>
@@ -160,5 +162,4 @@
         $('.calendar.outline.icon').popup();
         $('.bookmark.icon').popup();
         $('.horizontal.label').popup();
-        l
     </script>

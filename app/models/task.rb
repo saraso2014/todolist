@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  validates :name, presence: true, length: { in: 4..200 }
   belongs_to :project
   before_create :set_defaults
 

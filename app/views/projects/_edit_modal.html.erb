@@ -1,0 +1,15 @@
+<div class="ui tiny edit modal">
+    <div class="header">
+        Edit project
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <%= form_for(@project) do |f| %>
+                <%= f.text_field :name %>
+                    <p></p>
+                    <%= f.submit "Edit", class: "ui positive button" %>
+            <% end %>
+        </div>
+    </div>
+
+</div>

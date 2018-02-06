@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
     def index
-        @projects = Project.all
+      @projects = Project.all
     end
   
     def create
@@ -9,9 +9,16 @@ class ProjectsController < ApplicationController
       redirect_to projects_path, notice: 'Project was successfully created.'
     end
 
+    def edit
+      @project = Project.find(params[:id])
+      respond_to do |format|
+        format.js
+      end
+    end
+
     def update
       @project = Project.find(params[:id])
-      @project.update
+      @project.update(project_params)
       redirect_to projects_path, notice: 'Project was successfully updated.'
     end
 
