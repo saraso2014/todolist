@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
+  
     def index
-      @projects = Project.all
+      @projects = Project.where(:user_id => current_user.id)
     end
   
     def create
@@ -30,6 +32,6 @@ class ProjectsController < ApplicationController
   
     private
       def project_params
-        params.require(:project).permit(:name)
+        params.require(:project).permit(:name, :user_id)
       end
 end

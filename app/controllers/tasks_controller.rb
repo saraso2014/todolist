@@ -1,4 +1,6 @@
 class TasksController < ApplicationController  
+  before_action :authenticate_user!
+
     def create
       @project = Project.find(params[:project_id])
       @task = @project.tasks.create(task_params)
@@ -35,6 +37,6 @@ class TasksController < ApplicationController
   
     private
       def task_params
-        params.require(:task).permit(:name, :project_id, :id, :priority)
+        params.require(:task).permit(:name, :project_id, :id, :priority, :user_id)
       end
 end

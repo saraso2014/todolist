@@ -1,4 +1,20 @@
 <div class="ui container">
+
+        <% if user_signed_in? %>
+        Hello, 
+        <% if current_user.name? %>
+        <%= link_to current_user.name,edit_user_registration_path %>
+    <% else %>
+        <%= link_to current_user.email,edit_user_registration_path %>
+        <% end %></span>
+    (<%= link_to 'Log out', destroy_user_session_path, :method => :delete %>)
+    <% else %>
+    <div class="ui buttons">
+        <%= link_to 'Sign in', new_user_session_path, class: 'ui primary  button' %>
+        <%= link_to 'Sign up', new_user_registration_path, class: 'ui button' %>
+    </div>
+    <% end %>
+
     <p></p>
     <div class="cent">
      <%= image_tag  "logo.png" %>
@@ -34,6 +50,7 @@
                                 <div class="ui small right action fluid left icon input">
                                     <i class="add green icon"></i>
                                     <%= f.text_field :name, placeholder: "Add new task to the project..." do %>
+                                    <%= f.hidden_field :user_id,  :value => current_user.id %>
                                         <% end %>
                                             <div>
                                                 <%= f.submit 'Add', class: "ui green small button" %>
@@ -53,9 +70,11 @@
                                     <% if task.due_date %>
                                         <%= task.due_date.strftime("%F") %>
                                             <% else %>
-                                                <a>
-                                                    <i class="calendar outline icon" data-content="Add due date"></i>
-                                                </a>
+                                            
+                                            <a class="ui calendar" data-content="Due date">
+                                                <i class="calendar outline icon"></i>
+                                            </a>
+
                                                 <% end %>
 
                                                     <% case task.priority.to_i %>
@@ -94,9 +113,6 @@
                                         </div>
                             </div>
                             <% end %>
-
-
-
 
                                 <!--Completed tasks-->
 
@@ -152,6 +168,7 @@
 </div>
 
 <br/>
+
 <%= render 'add_new_modal' %>
 
     <script>
@@ -159,7 +176,10 @@
         $(".notice").fadeOut(5000);
         $('.write.icon').popup();
         $('.delete.icon').popup();
-        $('.calendar.outline.icon').popup();
+        $('.inline.calendar').popup();
         $('.bookmark.icon').popup();
         $('.horizontal.label').popup();
+        $('.ui.calendar').calendar({
+            type: 'date'
+          });
     </script>

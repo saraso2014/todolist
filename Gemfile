@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'semantic-ui-sass'
 gem 'devise'
 gem 'jquery-rails'
+gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 
 group :development do
   gem 'sqlite3'
