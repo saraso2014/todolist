@@ -11,24 +11,46 @@
     <div class="ui segment">
         1. Get all statuses, not repeating, alphabetically ordered
         <pre style="background:#042029;color:#839496"><span style="color:#859900">
-        SELECT DISTINCT</span> status <span style="color:#859900">FROM</span> tasks <span style="color:#859900">ORDER BY</span> status <span style="color:#859900">ASC</span>
+        SELECT DISTINCT</span> status <span style="color:#859900">FROM</span> tasks <span style="color:#859900">ORDER BY</span> status <span style="color:#859900">ASC</span>;
         </pre>
     </div>
     <div class="ui segment">
         2. Get the count of all tasks in each project, order by tasks count descending
+        <pre style="background:#042029;color:#839496"><span style="color:#859900">
+        SELECT</span> <span style="color:#268bd2">COUNT</span>(id) <span style="color:#859900">FROM</span> tasks <span style="color:#859900">GROUP BY</span> project_id <span style="color:#859900">ORDER BY</span> <span style="color:#268bd2">COUNT</span>(id) <span style="color:#859900">DESC</span>;
+        </pre>
     </div>
     <div class="ui segment">
         3. Get the count of all tasks in each project, order by projects names
+        <pre style="background:#042029;color:#839496"><span style="color:#859900">
+        SELECT</span> <span style="color:#268bd2">COUNT</span>(<span style="color:#cb4b16">tasks</span>.<span style="color:#cb4b16">id</span>) <span style="color:#859900">
+        FROM</span> tasks <span style="color:#859900">
+        INNER JOIN</span> projects <span style="color:#859900">on</span> <span style="color:#cb4b16">tasks</span>.<span style="color:#cb4b16">project_id</span> <span style="color:#859900">=</span> <span style="color:#cb4b16">projects</span>.<span style="color:#cb4b16">id</span> <span style="color:#859900">
+        GROUP BY</span> project_id <span style="color:#859900">
+        ORDER BY</span> <span style="color:#cb4b16">projects</span>.<span style="color:#cb4b16">name</span>;
+        </pre>
     </div>
     <div class="ui segment">
         4. Get the tasks for all projects having the name beginning with “N” letter
+        <pre style="background:#042029;color:#839496"><span style="color:#859900">
+        SELECT</span> <span style="color:#859900">*</span> <span style="color:#859900">FROM</span> tasks <span style="color:#859900">WHERE</span> name <span style="color:#859900">LIKE</span> <span style="color:#269186"><span style="color:#c60000">'</span>N%'</span>;
+        </pre>
     </div>
     <div class="ui segment">
         5. Get the list of all projects containing the ‘a’ letter in the middle of the name, and show the tasks count near
             each project. Mention that there can exist projects without tasks and tasks with project_id=NULL
+        <pre style="background:#042029;color:#839496"><span style="color:#859900">
+        SELECT</span> projects.<span style="color:#859900">*</span>, <span style="color:#268bd2">COUNT</span>(<span style="color:#cb4b16">tasks</span>.<span style="color:#cb4b16">id</span>) <span style="color:#859900">AS</span> Tasks_Count <span style="color:#859900">
+        FROM</span> tasks <span style="color:#859900">
+        INNER JOIN</span> projects <span style="color:#859900">on</span> <span style="color:#cb4b16">tasks</span>.<span style="color:#cb4b16">project_id</span> <span style="color:#859900">=</span> <span style="color:#cb4b16">projects</span>.<span style="color:#cb4b16">id</span> <span style="color:#859900">
+        WHERE</span> <span style="color:#cb4b16">tasks</span>.<span style="color:#cb4b16">name</span> <span style="color:#859900">LIKE</span> <span style="color:#269186"><span style="color:#c60000">'</span>%a%'</span>;
+        </pre>
     </div>
     <div class="ui segment">
         6. Get the list of tasks with duplicate names. Order alphabetically
+        <pre style="background:#042029;color:#839496"> <span style="color:#859900">
+        SELECT</span> <span style="color:#859900">*</span> <span style="color:#859900">FROM</span> tasks <span style="color:#859900">GROUP BY</span> name <span style="color:#859900">HAVING</span> <span style="color:#268bd2">count</span>(<span style="color:#859900">*</span>) <span style="color:#859900">></span> <span style="color:#d33682">1</span> <span style="color:#859900">ORDER BY</span> name <span style="color:#859900">ASC</span>;
+        </pre>
     </div>
     <div class="ui segment">
         7. Get the list of tasks having several exact matches of both name and status, from the project ‘Garage’. Order by
