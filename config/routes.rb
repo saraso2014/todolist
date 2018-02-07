@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sql/queries',     :as => 'queries'
+
   devise_for :users
   root 'projects#index'
 

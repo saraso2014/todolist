@@ -1,0 +1,42 @@
+<div class="ui container">
+    <p></p>
+    <h2 class="ui header">
+            <i class="database icon"></i>
+            <div class="content">
+              SQL task
+              <div class="sub header">Queries</div>
+            </div>
+          </h2>
+
+    <div class="ui segment">
+        1. Get all statuses, not repeating, alphabetically ordered
+        <pre style="background:#042029;color:#839496"><span style="color:#859900">
+        SELECT DISTINCT</span> status <span style="color:#859900">FROM</span> tasks <span style="color:#859900">ORDER BY</span> status <span style="color:#859900">ASC</span>
+        </pre>
+    </div>
+    <div class="ui segment">
+        2. Get the count of all tasks in each project, order by tasks count descending
+    </div>
+    <div class="ui segment">
+        3. Get the count of all tasks in each project, order by projects names
+    </div>
+    <div class="ui segment">
+        4. Get the tasks for all projects having the name beginning with “N” letter
+    </div>
+    <div class="ui segment">
+        5. Get the list of all projects containing the ‘a’ letter in the middle of the name, and show the tasks count near
+            each project. Mention that there can exist projects without tasks and tasks with project_id=NULL
+    </div>
+    <div class="ui segment">
+        6. Get the list of tasks with duplicate names. Order alphabetically
+    </div>
+    <div class="ui segment">
+        7. Get the list of tasks having several exact matches of both name and status, from the project ‘Garage’. Order by
+            matches count
+    </div>
+    <div class="ui segment">
+        8. Get the list of project names having more than 10 tasks in status ‘completed’. Order by project_id
+    </div>
+
+
+</div>

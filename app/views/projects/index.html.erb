@@ -7,7 +7,7 @@
     <% else %>
         <%= link_to current_user.email,edit_user_registration_path %>
         <% end %></span>
-    (<%= link_to 'Log out', destroy_user_session_path, :method => :delete %>)
+    (<%= link_to 'Log out', destroy_user_session_path, :method => :delete %>), you can find SQL task <%= link_to "here", queries_path %>. 
     <% else %>
     <div class="ui buttons">
         <%= link_to 'Sign in', new_user_session_path, class: 'ui primary  button' %>
