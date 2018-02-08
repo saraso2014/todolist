@@ -89,7 +89,7 @@
                                                             <% end %>
                                                             </div>
 
-                                                            <%= link_to edit_project_task_path(task.project_id, task), remote: true do %>
+                                                            <%= link_to edit_project_task_path(task.project, task), remote: true do %>
                                                             <i class="ui grey write icon task" data-content="Edit"></i>
                                                             <% end %>
 
@@ -109,8 +109,6 @@
                                     <% end %>
 
                                         <div class="ui checkbox">
-
-
 
                                         </div>
                             </div>
@@ -143,23 +141,18 @@
 
                                                 <div class="ui checkbox">
 
-
-
-                                                </div>
+                                             </div>
                                     </div>
                                     <% end %>
 
                                         <!--End of Completed tasks-->
-
 
                     </div>
 
                 </div>
                 <% end %>
 
-
-
-                    <p></p>
+                   <p></p>
 
                     <div class="cent">
                         <button class="ui labeled icon primary addnew button">
