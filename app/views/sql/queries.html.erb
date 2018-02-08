@@ -55,10 +55,19 @@
     <div class="ui segment">
         7. Get the list of tasks having several exact matches of both name and status, from the project ‘Garage’. Order by
             matches count
+        <pre style="background:#042029;color:#839496">  <span style="color:#859900">
+        SELECT</span> <span style="color:#859900">*</span>, <span style="color:#268bd2">COUNT</span>(id) 
+            <span style="color:#859900">FROM</span> (<span style="color:#859900">SELECT</span> <span style="color:#859900">*</span> <span style="color:#859900">FROM</span> tasks
+        <span style="color:#859900">INNER JOIN</span> projects <span style="color:#859900">ON</span> <span style="color:#cb4b16">tasks</span>.<span style="color:#cb4b16">project_id</span> <span style="color:#859900">=</span> <span style="color:#cb4b16">projects</span>.<span style="color:#cb4b16">id</span>
+        <span style="color:#859900">WHERE</span> <span style="color:#cb4b16">projects</span>.<span style="color:#cb4b16">name</span> <span style="color:#859900">=</span> <span style="color:#269186"><span style="color:#c60000">'</span>Garage'</span>)
+        <span style="color:#859900">GROUP BY</span> name, status
+        <span style="color:#859900">HAVING</span> (<span style="color:#268bd2">count</span>(name) <span style="color:#859900">></span> <span style="color:#d33682">1</span> <span style="color:#859900">AND</span> <span style="color:#268bd2">count</span>(status) <span style="color:#859900">></span> <span style="color:#d33682">1</span>) <span style="color:#859900">AND</span> (<span style="color:#268bd2">count</span>(name) <span style="color:#859900">=</span> <span style="color:#268bd2">count</span>(status))
+        <span style="color:#859900">ORDER BY</span> <span style="color:#268bd2">count</span>(name);
+        </pre>
     </div>
     <div class="ui segment">
         8. Get the list of project names having more than 10 tasks in status ‘completed’. Order by project_id
     </div>
-
+    <p></p>
 
 </div>
