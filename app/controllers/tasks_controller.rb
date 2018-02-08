@@ -1,6 +1,14 @@
 class TasksController < ApplicationController  
   before_action :authenticate_user!
 
+    def edit
+      @project = Project.find(params[:project_id])
+      @task = @project.tasks.find(params[:id])
+      respond_to do |format|
+        format.js
+      end
+    end
+
     def create
       @project = Project.find(params[:project_id])
       @task = @project.tasks.create(task_params)
@@ -8,8 +16,7 @@ class TasksController < ApplicationController
     end
 
     def update
-      @project = Project.find(params[:project_id])
-      @task = @project.tasks.find(params[:id])
+      @task = Task.find(params[:id])
       @task.update(task_params)
       redirect_to projects_path
     end
@@ -37,6 +44,6 @@ class TasksController < ApplicationController
   
     private
       def task_params
-        params.require(:task).permit(:name, :project_id, :id, :priority, :user_id)
+        params.require(:task).permit(:name, :project_id, :id, :priority, :user_id, :due_date, :status)
       end
 end

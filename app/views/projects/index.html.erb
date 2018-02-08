@@ -68,14 +68,11 @@
                                 <span class="right floated">
 
                                     <% if task.due_date %>
-                                        <%= task.due_date.strftime("%F") %>
+                                    <span class="meta"><%= task.due_date.strftime("%F") %> </span>
+                                      
                                             <% else %>
                                             
-                                            <a class="ui calendar" data-content="Due date">
-                                                <i class="calendar outline icon"></i>
-                                            </a>
-
-                                                <% end %>
+                                                 <% end %>
 
                                                     <% case task.priority.to_i %>
                                                     <% when 1 %>
@@ -91,7 +88,12 @@
                                                             <%= Task::PRIORITIES[task.priority.to_i] %>
                                                             <% end %>
                                                             </div>
-                                                                <i class="ui grey write icon" data-content="Edit"></i>
+
+                                                            <%= link_to edit_project_task_path(task.project_id, task), remote: true do %>
+                                                            <i class="ui grey write icon task" data-content="Edit"></i>
+                                                            <% end %>
+
+                                                                
                                                             <%= link_to [task.project, task],
                                                          method: :delete do %>
                                                         <i class="ui grey delete icon" data-content="Delete"></i>
